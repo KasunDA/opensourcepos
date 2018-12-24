@@ -42,32 +42,20 @@
 			var id = $(this).parent().find('input').attr('id');
 			id = id.replace(/.*?_(\d+)$/g, "$1");
 
-			var previous_jurisdiction_id = 'jurisdiction_id_' + id;
 			var previous_jurisdiction_name_id = 'jurisdiction_name_' + id;
-            var previous_tax_group_id = 'tax_group_' + id;
-			var previous_tax_type_id = 'tax_type_' + id;
-			var previous_reporting_authority_id = 'reporting_authority_' + id;
-			var previous_tax_group_sequence_id = 'tax_group_sequence_' + id;
-			var previous_cascade_sequence_id = 'cascade_sequence_' + id;
 			var block = $(this).parent().clone(true);
 			var new_block = block.insertAfter($(this).parent());
 			++tax_jurisdictions_count;
-			var new_jurisdiction_id = 'jurisdiction_id_' + tax_jurisdictions_count;
 			var new_jurisdiction_name_id = 'jurisdiction_name_' + tax_jurisdictions_count;
-            var new_tax_group_id = 'tax_group_' + tax_jurisdictions_count;
-			var new_tax_type_id = 'tax_type_' + tax_jurisdictions_count;
-			var new_reporting_authority_id = 'reporting_authority_' + tax_jurisdictions_count;
-			var new_tax_group_sequence_id = 'tax_group_sequence_' + tax_jurisdictions_count;
-			var new_cascade_sequence_id = 'cascade_sequence_' + tax_jurisdictions_count;
 
 			$(new_block).find('label').html("<?php echo $this->lang->line('taxes_tax_jurisdiction'); ?> " + tax_jurisdictions_count).attr('for', new_jurisdiction_name_id).attr('class', 'control-label col-xs-2');
-			$(new_block).find("input[name='"+previous_jurisdiction_id+"']").attr('name', new_jurisdiction_id).val('-1');
-			$(new_block).find("input[id='"+previous_jurisdiction_name_id+"']").attr('id', new_jurisdiction_name_id).removeAttr('disabled').attr('name', new_jurisdiction_name_id).attr('class', 'form-control required input-sm').val('');
-            $(new_block).find("input[id='"+previous_tax_group_id+"']").attr('id', new_tax_group_id).removeAttr('disabled').attr('name', new_tax_group_id).attr('class', 'form-control required input-sm').val('');
-			$(new_block).find("select[name='"+previous_tax_type_id+"']").attr('name', new_tax_type_id).removeAttr('disabled').attr('class', 'form-control required input-sm').val('');
-			$(new_block).find("input[id='"+previous_reporting_authority_id+"']").attr('id', new_reporting_authority_id).removeAttr('disabled').attr('name', new_reporting_authority_id).attr('class', 'form-control input-sm').val('');
-			$(new_block).find("input[id='"+previous_tax_group_sequence_id+"']").attr('id', new_tax_group_sequence_id).removeAttr('disabled').attr('name', new_tax_group_sequence_id).attr('class', 'form-control input-sm').val('');
-			$(new_block).find("input[id='"+previous_cascade_sequence_id+"']").attr('id', new_cascade_sequence_id).removeAttr('disabled').attr('name', new_cascade_sequence_id).attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='jurisdiction_name[]']").attr('id', new_jurisdiction_name_id).removeAttr('disabled').attr('class', 'form-control required input-sm').val('');
+			$(new_block).find("input[name='tax_group[]']").removeAttr('disabled').attr('class', 'form-control required input-sm').val('');
+			$(new_block).find("select[name='tax_type[]']").removeAttr('disabled').attr('class', 'form-control required input-sm').val('');
+			$(new_block).find("input[name='reporting_authority[]']").removeAttr('disabled').attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='tax_group_sequence[]']").removeAttr('disabled').attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='cascade_sequence[]']").removeAttr('disabled').attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='jurisdiction_id[]']").val('-1');
 			hide_show_remove();
 		};
 
@@ -137,7 +125,7 @@
 				foreach($tax_jurisdictions as $tax_jurisdiction=>$tax_jurisdiction_data)
 				{
 				?>
-				<?php echo 'tax_jurisdiction_' . ++$i ?>: "<?php echo $this->lang->line('taxes_tax_jurisdiction_required'); ?>",
+					<?php echo 'tax_jurisdiction_' . ++$i ?>: "<?php echo $this->lang->line('taxes_tax_jurisdiction_required'); ?>",
 				<?php
 				}
 				?>

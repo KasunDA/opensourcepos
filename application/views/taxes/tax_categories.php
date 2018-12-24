@@ -41,22 +41,16 @@
 			var id = $(this).parent().find('input').attr('id');
 			id = id.replace(/.*?_(\d+)$/g, "$1");
 
-			var previous_tax_category_id_id = 'tax_category_id_' + id;
 			var previous_tax_category_id = 'tax_category_' + id;
-			var previous_default_tax_rate_id = 'default_tax_rate_' + id;
-			var previous_tax_group_sequence_id = 'tax_group_sequence_' + id;
 			var block = $(this).parent().clone(true);
 			var new_block = block.insertAfter($(this).parent());
-			var new_tax_category_id_id = 'tax_category_id_' + ++tax_categories_count;
+            ++tax_categories_count;
 			var new_tax_category_id = 'tax_category_' + tax_categories_count;
-			var new_default_tax_rate_id = 'default_tax_rate_' + tax_categories_count;
-			var new_tax_group_sequence_id = 'tax_group_sequence_' + tax_categories_count;
 
 			$(new_block).find('label').html("<?php echo $this->lang->line('taxes_tax_category'); ?> " + tax_categories_count).attr('for', new_tax_category_id).attr('class', 'control-label col-xs-2');
-			$(new_block).find("input[name='"+previous_tax_category_id_id+"']").attr('name', new_tax_category_id_id).val('-1');
-			$(new_block).find("input[id='"+previous_tax_category_id+"']").attr('id', new_tax_category_id).removeAttr('disabled').attr('name', new_tax_category_id).attr('class', 'form-control input-sm').val('');
-			$(new_block).find("input[id='"+previous_default_tax_rate_id+"']").attr('id', new_default_tax_rate_id).removeAttr('disabled').attr('name', new_default_tax_rate_id).attr('class', 'form-control input-sm').val('');
-			$(new_block).find("input[id='"+previous_tax_group_sequence_id+"']").attr('id', new_tax_group_sequence_id).removeAttr('disabled').attr('name', new_tax_group_sequence_id).attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='tax_category[]']").attr('id', new_tax_category_id).removeAttr('disabled').attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='tax_group_sequence[]']").removeAttr('disabled').attr('class', 'form-control input-sm').val('');
+            $(new_block).find("input[name='tax_category_id[]']").val('-1');
 			hide_show_remove();
 		};
 
@@ -126,7 +120,7 @@
 			foreach($tax_categories as $tax_category=>$tax_category_data)
 			{
 			?>
-			<?php echo 'tax_category_' . ++$i ?>: "<?php echo $this->lang->line('taxes_tax_category_required'); ?>",
+				<?php echo 'tax_category_' . ++$i ?>: "<?php echo $this->lang->line('taxes_tax_category_required'); ?>",
 			<?php
 			}
 			?>

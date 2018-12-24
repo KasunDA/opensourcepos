@@ -38,27 +38,20 @@
 		};
 
 		var add_tax_code = function() {
-			var id = $(this).parent().find('input').attr('id');
+			var id = $(this).parent().find("input[name='tax_code[]']").attr('id');
 			id = id.replace(/.*?_(\d+)$/g, "$1");
-			var previous_tax_code_id_id = 'tax_code_id_' + id;
 			var previous_tax_code_id = 'tax_code_' + id;
-			var previous_tax_code_name_id = 'tax_code_name_' + id;
-			var previous_city_id = 'city_' + id;
-			var previous_statte_id = 'state_' + id;
 			var block = $(this).parent().clone(true);
 			var new_block = block.insertAfter($(this).parent());
 			++tax_code_count;
-			var new_tax_code_id_id = 'tax_code_id_' + tax_code_count;
 			var new_tax_code_id = 'tax_code_' + tax_code_count;
-			var new_tax_code_name_id = 'tax_code_name_' + tax_code_count;
-			var new_city_id = 'city_' + tax_code_count;
-			var new_state_id = 'state_' + tax_code_count;
 
 			$(new_block).find('label').html("<?php echo $this->lang->line('taxes_tax_code'); ?> " + tax_code_count).attr('for', new_tax_code_id).attr('class', 'control-label col-xs-2');
-			$(new_block).find("input[id='"+previous_tax_code_id+"']").attr('id', new_tax_code_id).removeAttr('disabled').attr('name', new_tax_code_id).attr('class', 'form-control text-uppercase required input-sm').val('');
-			$(new_block).find("input[id='"+previous_tax_code_name_id+"']").attr('id', new_tax_code_name_id).removeAttr('disabled').attr('name', new_tax_code_name_id).attr('class', 'form-control required input-sm').val('');
-			$(new_block).find("input[id='"+previous_city_id+"']").attr('id', new_city_id).removeAttr('disabled').attr('name', new_city_id).attr('class', 'form-control input-sm').val('');
-			$(new_block).find("input[id='"+previous_statte_id+"']").attr('id', new_state_id).removeAttr('disabled').attr('name', new_state_id).attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='tax_code[]']").attr('id', new_tax_code_id).removeAttr('disabled').attr('class', 'form-control text-uppercase required input-sm').val('');
+			$(new_block).find("input[name='tax_code_name[]']").removeAttr('disabled').attr('class', 'form-control required input-sm').val('');
+			$(new_block).find("input[name='city[]']").removeAttr('disabled').attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='state[]']").removeAttr('disabled').attr('class', 'form-control input-sm').val('');
+			$(new_block).find("input[name='tax_code_id[]']").val('-1');
 
 			hide_show_remove();
 		};
@@ -129,7 +122,7 @@
 				foreach($tax_codes as $tax_code=>$tax_code_data)
 				{
 				?>
-				<?php echo 'tax_code_' . ++$i ?>: "<?php echo $this->lang->line('taxes_tax_code_required'); ?>",
+					<?php echo 'tax_code_' . ++$i ?>: "<?php echo $this->lang->line('taxes_tax_code_required'); ?>",
 				<?php
 				}
 				?>
